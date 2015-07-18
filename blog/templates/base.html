@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+    <head profile="http://gmpg.org/xfn/11">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Abel's Blog</title>
+        <script type="text/javascript" src="/medias/colorpaper/js/jquery-1.11.1.min.js">
+        </script>
+        <script type="text/javascript" src="/medias/style/blackstar/js/modernizr-1.5.min.js"></script>
+        <script type="text/javascript">
+            var AKPC_IDS = "";
+        </script>
+        <link rel="stylesheet" type="text/css" href="/medias/style/blackstar/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/medias/style/blackstar/css/custom.css" />
+        <link type="text/css" rel="stylesheet" href="/medias/validator/style/validator.css"/>
+        <link href="/medias/styles/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+       
+        <script>
+            function switchCss(type){
+            
+            }
+        </script>
+
+    </head>
+    
+    
+    <body>
+  <div id="main">
+    <header>
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="/"><span class="logo_colour">Abel's Blog</span></a></h1>
+          <h2>Thinking, Coding, Reading, Feeling</h2>
+        </div>
+      </div>
+      <nav>
+        <div id="menu_container">
+          <ul class="sf-menu" id="nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/1/1/">Thinking</a>
+            	<ul id="thinking-sub">
+	            	{%for etype in essay_type%}
+	            		{%ifnotequal etype.baseType None%}
+	            		{%ifequal etype.baseType.id 1 %}
+	            			<li><a href="/blog/{{etype.id}}/1/">{{etype}}</a></li>
+	            		{% endifequal %}
+	            		{% endifnotequal%}
+	            	{% endfor %}
+            	</ul>
+            </li>
+            <li><a href="/blog/2/1/">Coding</a>
+            	<ul id="coding-sub">
+	            	{%for etype in essay_type%}
+	            		{%ifnotequal etype.baseType None%}
+	            		{%ifequal etype.baseType.id 2 %}
+	            			<li><a href="/blog/{{etype.id}}/1/">{{etype}}</a></li>
+	            		{% endifequal %}
+	            		{% endifnotequal%}
+	            	{% endfor %}
+            	</ul>
+            </li>
+            <li><a href="/blog/3/1/">Reading</a>
+            	<ul id="reading-sub">
+	            	{%for etype in essay_type%}
+	            		{%ifnotequal etype.baseType None%}
+	            		{%ifequal etype.baseType.id 3 %}
+	            			<li><a href="/blog/{{etype.id}}/1/">{{etype}}</a></li>
+	            		{% endifequal %}
+	            		{% endifnotequal%}
+	            	{% endfor %}
+            	</ul>
+            </li>
+            <li><a href="/blog/4/1/">Feeling</a>
+            	<ul id="feeling-sub">
+	            	{%for etype in essay_type%}
+	            		{%ifnotequal etype.baseType None%}
+	            		{%ifequal etype.baseType.id 4 %}
+	            			<li><a href="/blog/{{etype.id}}/1/">{{etype}}</a></li>
+	            		{% endifequal %}
+	            		{% endifnotequal%}
+	            	{% endfor %}
+            	</ul>
+            </li>
+            <li><a href="/blog/aboutme">About Me</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div id="site_content">
+      <div id="sidebar_container">
+        <img class="paperclip" src="/medias/style/blackstar/images/paperclip.png" alt="paperclip" />
+        <div class="sidebar">
+          <h3 style="border-bottom:1px solid #d3d3d3;padding-bottom:5px;margin-bottom:9px;font-weight:bold">Welcome</h3>
+          <p class="customside" style="padding-bottom:0px">This is Abel's blog, welcome to leave your comment.</p>
+          <p class="customside" style="padding-bottom:0px"><a href="/blog/chat">Chatting Room</a></p>
+          <h4 class="customside" style="border-bottom:1px solid #d3d3d3;font-weight:bold;color:#74706E;">About</h4>
+          <p class="customside" style="padding-bottom:0px"><a href="/blog/aboutme">About Me</a></p>
+          <p class="customside"><img src="/medias/style/blackstar/images/photo.jpg" height="100px"></img></p>
+        </div>
+        <img class="paperclip" src="/medias/style/blackstar/images/paperclip.png" alt="paperclip" />
+        <div class="sidebar">
+          <h3>Useful Links</h3>
+          <ul>
+            <li><a href="http://www.ruanyifeng.com/home.html">阮一峰的个人网站</a></li>
+            <li><a href="http://www.zhihu.com/">知乎</a></li>
+            <li><a href="http://www.google.com/">Google</a></li>
+            <li><a href="http://www.csdn.net/">CSDN</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="content">
+        {% block maincontent %}
+		{% endblock %}
+		{% block details %}
+		{% endblock %}
+		{% block chatroom %}
+		{% endblock %}
+      </div>
+    </div>
+    <div id="scroll">
+      <a title="Scroll to the top" class="top" href="#"><img src="/medias/style/blackstar/images/top.png" alt="top" /></a>
+    </div>
+    <footer>
+      <p><a href="/blog/">Home</a> | <a href="/blog/1/1/">Thinking</a> | <a href="/blog/2/1/">Coding</a> | <a href="/blog/3/1/">Reading</a> | <a href="/blog/4/1/">Feeling</a> | <a href="/blog/aboutme">About Me</a></p>
+      <p>Copyright &copy; Abel | fshb1988@gmail.com</p>
+    </footer>
+  </div>
+  <!-- javascript at the bottom for fast page loading -->
+  <script type="text/javascript" src="/medias/style/blackstar/js/jquery.easing-sooper.js"></script>
+  <script type="text/javascript" src="/medias/style/blackstar/js/jquery.sooperfish.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+    	$('ul.sf-menu li ul').each(function(index,element){
+    	  	if(element.children.length < 1){
+    	  		element.remove();
+    	  	}
+		 });
+      $('ul.sf-menu').sooperfish();
+      $('.top').click(function() {$('html, body').animate({scrollTop:0}, 'fast'); return false;});
+      
+    });
+  </script>
+</body>
+    
+    
+  
+</html>

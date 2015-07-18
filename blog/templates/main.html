@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block maincontent %}
+<div>
+	<div class="content">
+		<img style="float: left; vertical-align: middle; margin: 0 10px 0 0;height:60px" src="/medias/style/blackstar/images/home.png" alt="home" /><h1 style="margin: 0 0 0 0;">Recent Articles</h1>
+		<ul>
+			{%for essay in  page.object_list%}
+			 <li>
+			 	<a href="/blog/essay/{{essay.id}}/" rel="bookmark" title="{{essay.title}}" class="essaytitle">{{essay.title}}</a>
+                <span class="publishday block">{{essay.pub_date.ctime.split.1}} {{essay.pub_date.day}}, {{essay.pub_date.year}}</span>
+				 <span class="viewcommenttimes">&nbsp; | &nbsp; 浏览: {{essay.view_count}}   次  &nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;<a href="/blog/essay/{{essay.id}}/#comments" title="关于{{essay.title}}的评论">{{essay.essay_comment.all.count}} Comments</a>
+                        &nbsp; | &nbsp; </span>
+				<div class="essayabstract">
+                        {{essay.abstract|safe}}
+                </div>
+			 </li>
+			{%endfor%}
+        </ul>
+	</div>
+		
+		<div class="pagination">
+			{%if page.has_previous%}<a href="/blog/0/{{page.previous_page_number}}/">上一页</a>
+			{%endif%}<span class="extralarge">{{page.number}} of
+				{{pcount}}</span> {%if page.has_next%}<a href="/blog/0/{{page.next_page_number}}/">下一页</a>
+			{%endif%}
+		</div>
+	</div>
+{% endblock %}

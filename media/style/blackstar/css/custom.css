@@ -1,0 +1,118 @@
+.customside{
+	margin-left:10px;
+	font-color:#7A7A68;
+	margin-bottom:9px;
+}
+.essaytitle{
+	font-weight:bold;
+	font-family:Microsoft YaHei;
+}
+.essayabstract{
+	margin-left:20px;
+	font-size:0.6em;
+}
+.publishday{
+	font:italic 95% arial;
+	font-size:0.5em;
+	color:#BBB;
+}
+.viewcommenttimes{
+	font-size:0.5em;
+}
+
+.pagination {
+	margin:0 0 20px 0; padding:0;
+	width:auto; height:auto;
+	text-align:center;
+}
+
+	.pagination a {
+		margin:0 8px;
+		font:normal 1em Verdana, Arial, Helvetica, sans-serif;
+		line-height:26px;
+	}
+	
+.clearfix {
+    display: inline-block;
+}
+
+.page-title-content {
+	margin:0; padding:0px 0px 0px 0px;
+	width:auto; height:100px;
+}
+
+.essay-detail-title h1{
+	margin:0;
+	padding:0;
+	font-family:Microsoft YaHei;
+	font-weight:bold;
+}
+.post-meta-single {
+	margin:16px 0 0 2em; padding:0;
+	font:'Yanone Kaffeesatz','Microsoft Yahei',helvetica,arial,verdana,sans;
+}
+	.post-meta-single a{
+		font-family:'Yanone Kaffeesatz','Microsoft Yahei',helvetica,arial,verdana,sans;
+		font-size:18px;
+	}
+	.post-meta-single span{
+		font-family:'Yanone Kaffeesatz','Microsoft Yahei',helvetica,arial,verdana,sans;
+		font-size:18px;
+	}
+	
+.post {
+	margin-top:20px;
+	text-indent:2em;
+}
+.comments{
+	margin-top:20px;
+	font-weight:bold;
+}
+	
+.commentlist {
+	margin:0; padding:0;
+	width:auto; height:auto;
+	list-style:none;
+}
+	.commentlist .alt{
+	}	
+.weight-bold, .weight-bold a {
+	font-weight:bold;
+}
+.block {
+	display:block;
+}
+.large {
+	font-size:1.25em;
+}
+.text {
+	margin:0; padding:4px;
+	border:1px solid #c8c2b0;
+	font:8pt Arial, Helvetica, sans-serif; color:#989271;
+}
+.btn, a.btn:link, a.btn:active, a.btn:visited, .submit {
+	text-align:center;
+	font:bold 1em Arial, Helvetica, sans-serif;
+	line-height:24px; 
+	min-width:80px;
+	margin-top:20px;
+}
+.submit {
+	border:0;
+}
+.comment-author {
+	margin-bottom:10px;
+}
+.comment-text {
+	margin-left:40px;
+	margin-bottom:10px;
+}
+div .chatroom 
+{
+	background-color:white;
+	border:solid 1px;
+	overflow-y:auto;
+	height:300px
+}
+	
+

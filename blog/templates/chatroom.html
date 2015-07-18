@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block chatroom %}
+<!--表单验证组件-->
+<script src="/medias/validator/formValidator.js" type="text/javascript" charset="UTF-8"></script>
+<script src="/medias/validator/formValidatorRegex.js" type="text/javascript" charset="UTF-8"></script>
+<link type="text/css" rel="stylesheet" href="/medias/validator/style/validator.css"/>
+<script>
+    $(document).ready(function(){
+        $.formValidator.initConfig({
+            formid: "comment_form",
+            validatorgroup: "1",
+            onerror: function(msg){
+                alert(msg);
+                return false;
+            },
+            onsuccess: function(){
+                return true;
+            }
+        });
+        $.formValidator.initConfig({
+            formid: "search_form",
+            validatorgroup: "2",
+            onerror: function(msg){
+                alert(msg);
+                return false;
+            },
+            onsuccess: function(){
+                return true;
+            }
+        });
+        $("#keyword").formValidator({
+            validatorgroup: "2",
+            onshow: "请输入关键字",
+            onfocus: "关键字不能为空",
+            oncorrect: "输入正确"
+        }).inputValidator({
+            min: 1,
+            empty: {
+                leftempty: false,
+                rightempty: false,
+                emptyerror: "关键字不能有空符号"
+            },
+            onerror: "关键字不能为空,请确认"
+        });
+        $("#uname").formValidator({
+            validatorgroup: "1",
+            onshow: "请输入名称",
+            onfocus: "用户名不能为空",
+            oncorrect: "输入正确"
+        }).inputValidator({
+            min: 1,
+            empty: {
+                leftempty: false,
+                rightempty: false,
+                emptyerror: "用户名两边不能有空符号"
+            },
+            onerror: "用户名不能为空,请确认"
+        });
+        
+        $("#email").formValidator({
+            validatorgroup: "1",
+            onshow: "请输入你的email",
+            onfocus: "请注意你输入的email格式，例如:info@126.com",
+            oncorrect: "输入正确"
+        }).regexValidator({
+            regexp: "email",
+            datatype: "enum",
+            onerror: "email格式不正确"
+        });
+        $("#comment").formValidator({
+            validatorgroup: "1",
+            onshow: "请输入留言内容",
+            onfocus: "留言内容不能为空",
+            oncorrect: "输入正确"
+        }).inputValidator({
+            min: 1,
+            onerror: "留言内容不能为空,请确认"
+        });
+    });
+</script>
+<script type="text/javascript" src="/medias/jscripts/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+tinyMCE.init({
+		// General options
+		mode : "textareas",
+		theme : "advanced",
+		plugins : "style,advhr,advimage,advlink,emotions,media,directionality,noneditable,visualchars,autosave,syntaxhl",
+
+		// Theme options
+		theme_advanced_buttons1 : "bold,italic,underline,strikethrough,fontselect,fontsizeselect,forecolor,backcolor,syntaxhl,link,unlink,image,emotions,",
+		theme_advanced_buttons2 : "",
+		theme_advanced_buttons3 : "",
+		remove_linebreaks : false, 
+		 extended_valid_elements : "textarea[cols|rows|disabled|name|readonly|class]",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		//theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : false,
+		theme_advanced_fonts : "宋体=宋体,黑体=黑体,楷体=楷体_GB2312,幼圆=幼圆,微软雅黑=微软雅黑,Arial=arial,Helvetica=helvetica,Sans-Serif=sans-serif;Courier New=courier new,Courier=courier,Monospace=monospace,Tahoma=tahoma,Times New Roman=times new roman,Verdana=verdana",
+		// Example content CSS (should be your site CSS)
+		content_css : "css/content.css"
+	});
+</script>
+<script type="text/javascript">//<![CDATA[
+    $(function () {
+        var s = new WebSocket('ws://127.0.0.1:8000/blog/chatroom');
+        s.onopen = function () {
+            console.log('WebSocket open');
+        };
+        s.onmessage = function (e) {
+        	var data = JSON.parse(e.data);
+            var container = $('#messagecontainer');
+            container.append('<p style="padding-bottom:2px;color:blue">' + data.user + "说："+'</p>');
+            container.append(data.content);
+            container.scrollTop(container[0].scrollHeight);
+        };
+        window.s = s;
+
+        $('#send_message').click(function () {
+        	if(!$.formValidator.isOneValid("uname")){
+        		alert("请输入正确的用户名");
+        		return;
+        	}
+        	if(!$.formValidator.isOneValid("email")){
+        		alert("请输入正确的email地址");
+        		return;
+        	}
+
+        	var username = $("#uname").val();
+        	var emailAddr = $("#email").val();
+        	s.send(JSON.stringify({
+            	user:username,
+            	email:emailAddr,
+            	content:tinyMCE.get('content').getContent()
+            }));
+        	tinyMCE.get('content').setContent("")
+        });
+        $("#uname").focus();
+    });
+</script>
+<table>
+	<tbody>
+		<tr>
+			<td>
+				<div id="messagecontainer" class="chatroom">
+				
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea  name="content" id="content" cols="100%" rows="10" tabindex="4" class="text textarea"></textarea>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<button type="button" id="send_message" class="btn">Send message</button>
+<table style="margin:10px 0 10px 0;">
+    <tr  style="height:30px">
+    	<td><label for="author" style="font-size:12px;">名字 (必须)：</label></td>
+        <td><input type="text" name="uname" id="uname" value="" size="22" tabindex="1" class="text" /></td>
+        <td><span id="unameTip" style="width:250px;padding-bottom:4px">
+        </span></td>
+    </tr>
+    <tr style="height:30px">
+    	<td><label for="email" style="font-size:12px;">EMail (不会公开) (必须)：</label></td>
+        <td><input type="text" name="email" id="email" value="" size="22" tabindex="2" class="text" /></td>
+        <td><span id="emailTip" style="width:250px;padding-bottom:4px"></span> </td>
+    </tr>
+</table>
+{% endblock %}

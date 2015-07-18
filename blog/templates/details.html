@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block details %}
+<div>
+	<div>
+		<script type="text/javascript">
+		 		var AKPC_IDS = "";
+		</script>
+		<!--语法高亮组件-->
+		<script src="/medias/scripts/shCore.js" type="text/javascript">
+		</script>
+		<script src="/medias/scripts/shBrushPython.js" type="text/javascript">
+		</script>
+		<script src="/medias/scripts/shBrushJava.js" type="text/javascript">
+		</script>
+		<script src="/medias/scripts/shBrushSql.js" type="text/javascript">
+		</script>
+		<script src="/medias/scripts/shBrushCpp.js" type="text/javascript">
+		</script>
+		<script src="/medias/scripts/shBrushJScript.js" type="text/javascript">
+		</script>
+		<script src="/medias/scripts/shBrushXml.js" type="text/javascript">
+		</script>
+		<script type="text/javascript">
+		 			SyntaxHighlighter.all();
+		</script>
+		<!--表单验证组件-->
+		<script src="/medias/validator/formValidator.js" type="text/javascript" charset="UTF-8"></script>
+		<script src="/medias/validator/formValidatorRegex.js" type="text/javascript" charset="UTF-8"></script>
+		<link type="text/css" rel="stylesheet" href="/medias/validator/style/validator.css"/>
+		<script>
+		    $(document).ready(function(){
+		        $.formValidator.initConfig({
+		            formid: "comment_form",
+		            validatorgroup: "1",
+		            onerror: function(msg){
+		                alert(msg);
+		                return false;
+		            },
+		            onsuccess: function(){
+		                return true;
+		            }
+		        });
+		        $.formValidator.initConfig({
+		            formid: "search_form",
+		            validatorgroup: "2",
+		            onerror: function(msg){
+		                alert(msg);
+		                return false;
+		            },
+		            onsuccess: function(){
+		                return true;
+		            }
+		        });
+		        $("#keyword").formValidator({
+		            validatorgroup: "2",
+		            onshow: "请输入关键字",
+		            onfocus: "关键字不能为空",
+		            oncorrect: "输入正确"
+		        }).inputValidator({
+		            min: 1,
+		            empty: {
+		                leftempty: false,
+		                rightempty: false,
+		                emptyerror: "关键字不能有空符号"
+		            },
+		            onerror: "关键字不能为空,请确认"
+		        });
+		        $("#uname").formValidator({
+		            validatorgroup: "1",
+		            onshow: "请输入名称",
+		            onfocus: "用户名不能为空",
+		            oncorrect: "输入正确"
+		        }).inputValidator({
+		            min: 1,
+		            empty: {
+		                leftempty: false,
+		                rightempty: false,
+		                emptyerror: "用户名两边不能有空符号"
+		            },
+		            onerror: "用户名不能为空,请确认"
+		        });
+		        
+		        $("#email").formValidator({
+		            validatorgroup: "1",
+		            onshow: "请输入你的email",
+		            onfocus: "请注意你输入的email格式，例如:info@126.com",
+		            oncorrect: "输入正确"
+		        }).regexValidator({
+		            regexp: "email",
+		            datatype: "enum",
+		            onerror: "email格式不正确"
+		        });
+		        $("#comment").formValidator({
+		            validatorgroup: "1",
+		            onshow: "请输入留言内容",
+		            onfocus: "留言内容不能为空",
+		            oncorrect: "输入正确"
+		        }).inputValidator({
+		            min: 1,
+		            onerror: "留言内容不能为空,请确认"
+		        });
+		    });
+		</script>
+		<script type="text/javascript" src="/medias/jscripts/tiny_mce/tiny_mce.js"></script>
+		<script type="text/javascript">
+			tinyMCE.init({
+					// General options
+					mode : "textareas",
+					theme : "advanced",
+					plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist,autosave,syntaxhl",
+			
+					// Theme options
+					theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect,syntaxhl",
+					theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+					theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+					theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
+			
+					 remove_linebreaks : false, 
+					 extended_valid_elements : "textarea[cols|rows|disabled|name|readonly|class]",
+					theme_advanced_toolbar_location : "top",
+					theme_advanced_toolbar_align : "left",
+					theme_advanced_statusbar_location : "bottom",
+					theme_advanced_resizing : false,
+					theme_advanced_fonts : "宋体=宋体,黑体=黑体,楷体=楷体_GB2312,幼圆=幼圆,微软雅黑=微软雅黑,Arial=arial,Helvetica=helvetica,Sans-Serif=sans-serif;Courier New=courier new,Courier=courier,Monospace=monospace,Tahoma=tahoma,Times New Roman=times new roman,Verdana=verdana",
+					// Example content CSS (should be your site CSS)
+					content_css : "css/content.css",
+			
+					// Drop lists for link/image/media/template dialogs
+					template_external_list_url : "lists/template_list.js",
+					external_link_list_url : "lists/link_list.js",
+					external_image_list_url : "lists/image_list.js",
+					media_external_list_url : "lists/media_list.js",
+			
+					// Style formats
+					style_formats : [
+						{title : 'Bold text', inline : 'b'},
+						{title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
+						{title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
+						{title : 'Example 1', inline : 'span', classes : 'example1'},
+						{title : 'Example 2', inline : 'span', classes : 'example2'},
+						{title : 'Table styles'},
+						{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+					],
+			
+					// Replace values for the template plugin
+					template_replace_values : {
+						username : "Some User",
+						staffid : "991234"
+					}
+				});
+		</script>
+	</div>
+	<div class="essay-detail-title clearfix page-title-content">
+         <h1>
+             {{essay.title}}
+         </h1>
+         <div class="post-meta-single">
+             <span class="georgia block">Posted in <a href="/blog/{{essay.eType_id}}/1/" title="查看该类所有文章" rel="category">{{essay.eType}}</a>. on {{date_format.0}}, {{date_format.1}} {{date_format.2}}th, {{date_format.3}} by Abel</span>
+             <span class="tags"></span>
+         </div>
+	</div>
+	<hr/>
+    <div class="post">
+            {{essay.content|safe}}
+        <script type="text/javascript">
+            AKPC_IDS += "81,";
+        </script>
+    </div>
+    <hr/>
+	    <h3 id="comments" class="comments"><span class="">{{essay.essay_comment.all.count}}</span> 网友评论 </h3>
+	<ol class="commentlist">
+	    {%if essay.essay_comment.all%}
+	    {%for comment in essay.essay_comment.all%}
+	    <li id="comment-4099" class=" alt ">
+	    	<div style="border-bottom:1px dashed">
+		        <div class="comment-author">
+		            <!-- <img alt='' src='/medias/images/head.png' class='avatar avatar-56 photo' height='56' width='56' /> -->
+		            <span class="teal weight-bold verdana large">&nbsp; &nbsp; {{comment.uname}}说：</span>
+		        </div>
+		        <div class="comment-text">
+		            <span class="medium">
+		                <div style="padding-bottom:0">
+		                    {{comment.content|safe}}
+		                </div>
+		            </span>
+		        </div>
+		        <div style="height:20px"><span class="small verdana light" style="float:right;font-size:0.7em"> {{comment.pub_date|date:'Y年m月d日 H时i分'}}</span></div>
+	        </div>
+	    </li>
+	    {%endfor%}
+	    {%else%}
+	    	现在还没有评论！
+	    {%endif%}
+	</ol>
+	<div>
+	<h3 id="respond" class="comments">发表评论</h3>
+	<form action="/blog/leavemsg/{{essay.id}}/" method="post" id="comment_form">
+	    {%csrf_token%}
+	    <table style="margin:10px 0 10px 0;">
+		    <tr  style="height:30px">
+		    	<td><label for="author" style="font-size:12px;">名字 (必须)：</label></td>
+		        <td><input type="text" name="uname" id="uname" value="" size="22" tabindex="1" class="text" /></td>
+		        <td><span id="unameTip" style="width:250px;padding-bottom:4px">
+		        </span></td>
+		    </tr>
+		    <tr style="height:30px">
+		    	<td><label for="email" style="font-size:12px;">EMail (不会公开) (必须)：</label></td>
+		        <td><input type="text" name="email" id="email" value="" size="22" tabindex="2" class="text" /></td>
+		        <td><span id="emailTip" style="width:250px;padding-bottom:4px"></span> </td>
+		    </tr>
+	    </table>
+	        <textarea st name="comment" id="comment" cols="100%" rows="10" tabindex="4" class="text textarea">
+	        </textarea>
+	            <p>
+	                <input name="submit" type="submit" id="submit" tabindex="5" value="留言" class="btn submit btn-teal" /><input type="hidden" name="comment_post_ID" value="81" />
+	            </p>
+	        </form>
+	    </div>
+</div>
+{% endblock %}
